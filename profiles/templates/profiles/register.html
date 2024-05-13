@@ -1,0 +1,213 @@
+{% extends 'base.html' %}
+{%load static %}
+{% block content %}
+{% include 'nav1.html' %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+.page-Signup1 {
+  padding-top: 61px;
+  /* margin-top: 5rem; */
+}
+
+.signup-content {
+  text-align: center;
+  font-size: 45px;
+  font-weight: 400;
+}
+
+body {
+  font-family: "Reem Kufi", sans-serif !important;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
+}
+
+.sign-up {
+  max-width: 992px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column; /* Adjusted */
+  align-items: center; /* Adjusted */
+  justify-content: space-evenly !important;
+  padding-bottom: 45px;
+
+}
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  font-size: 15px;
+  color: #8198a6;
+  padding-bottom: 18px;
+  border: none;
+  border-bottom: 2px solid #dee6eb; /* Default bottom border */
+  transition: border-bottom 0.3s ease; /* Smooth transition for border */
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-bottom: 2px solid #007bff; /* Change the color as needed */
+  outline: none; /* Remove outline on focus */
+}
+
+.eye-icon {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.eye-icon::before {
+  content: "\f070";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 20px;
+  color: #ccc;
+}
+
+.eye-icon.open::before {
+  content: "\f06e";
+  color: #4caf50;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #e10f0f;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #250ba5;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.login-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-container input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.clipart {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.clipart img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 6.5rem;
+}
+
+@media screen and (min-width: 768px) {
+  .sign-up {
+    flex-direction: row; /* Adjusted */
+    justify-content: space-between; /* Adjusted */
+    align-items: flex-start; /* Adjusted */
+  }
+  .clipart {
+    margin-right: 20px;
+    margin-bottom: 0;
+  }
+  .form-group {
+    flex-basis: calc(50% - 20px); /* Adjusted */
+    margin-right: 20px; /* Added */
+  }
+}
+</style>
+<div class="page-Signup1">
+  <div class="signup-content">Bundelkhand University Alumini Association</div>
+  <div class="sign-up animatedParent">
+    <div class="clipart">
+      <img src="{% static 'profiles/Img/Bundelkhand_University_Logo.png' %}" alt="Clipart">
+    </div>
+    <form method="post">
+      {% csrf_token %}
+      <h2>Sign Up</h2>
+      <div class="form-group">
+        {{ form.username }}
+      </div>
+      <div class="form-group">
+        {{ form.email }}
+      </div>
+      <div class="form-group">
+        {{ form.password1 }}
+      </div>
+      <div class="form-group">
+        {{ form.password2 }}
+      </div>
+      <div class="form-group">
+        <button type="submit">Create My Account</button>
+      </div>
+      <div class="login-link">
+        <span>Already have an account? <a href="{% url 'login' %}">Login</a></span>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("Script loaded and DOMContentLoaded event fired.");
+
+  const togglePassword = document.querySelector(".toggle-password");
+  console.log("togglePassword:", togglePassword);
+
+  const passwordField = document.querySelector(
+    togglePassword.getAttribute("toggle")
+  );
+  console.log("passwordField:", passwordField);
+
+  togglePassword.addEventListener("click", function () {
+    console.log("Toggle password button clicked.");
+
+    const type =
+      passwordField.getAttribute("type") === "password"
+        ? "text"
+        : "password";
+    console.log("New type:", type);
+
+    passwordField.setAttribute("type", type);
+    console.log("Password field type set to:", type);
+
+    this.classList.toggle("open");
+    console.log("Toggle class 'open' on togglePassword button.");
+  });
+});
+</script>
+
+{% endblock content %}

@@ -1,0 +1,108 @@
+{% include 'nav.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job List</title>
+    <style>
+        body {
+            color: #000;
+            font-family: Arial, sans-serif;
+        }
+
+        .container451 {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .job-heading {
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        .job {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .job-card {
+            width: 300px;
+            border-radius: 15px;
+            margin: 20px;
+            overflow: hidden;
+            border: 2px solid;
+            background: #f0f0f0;
+            box-shadow: 5px 5px 15px #b8b8b8, -5px -5px 15px #ffffff;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .job-card-content {
+            padding: 20px;
+        }
+
+        .heading {
+            font-size: 24px;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .title {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .register-btn {
+            margin-top: 20px;
+            padding: 1rem 2.5rem;
+            background-color: #161691;
+            outline: none;
+            border: none;
+            text-decoration: none;
+            border-radius: 5rem;
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-weight: 600;
+            color: white;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .register-btn:hover {
+            background-color: gold;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="job-heading" style="font-size: 36px;
+    margin-bottom: 30px;
+    text-align: center; 
+    text-decoration: underline;">Jobs Details & Apply Now</h1>
+    <div class="container451">
+        <div class="job">
+            {% for job in jobs %}
+            <div class="job-card">
+                <div class="job-card-content">
+                    <h2 class="heading">{{ job.title }}</h2>
+                    <p class="title">{{ job.description }}</p>
+                    <a href="{% url 'features:job_detail' pk=job.pk %}" class="register-btn">Apply Now</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <a href="{% url 'features:job_create' %}" class="register-btn">Create New Job</a>
+</body>
+</html>

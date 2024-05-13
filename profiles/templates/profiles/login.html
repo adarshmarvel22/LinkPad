@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% include 'nav1.html' %}
+
+<style>
+    .page-Login {
+      padding-top: 61px;
+      /* margin-top: 5rem; */
+    }
+    
+    .login-content {
+      text-align: center;
+      font-size: 45px;
+      font-weight: 400;
+    }
+    
+    body {
+      font-family: "Reem Kufi", sans-serif !important;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+    }
+    
+    .login {
+        max-width: 992px;
+      width: 80%;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-evenly; /* Adjusted */
+      flex-wrap: wrap; /* Added */
+    }
+    .form-login{
+        width: 56%;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .form-group {
+      position: relative;
+      margin-bottom: 20px;
+      flex-basis: 100%; /* Added */
+    }
+    
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      font-size: 15px;
+      color: #8198a6;
+      padding-bottom: 8px;
+      border: none;
+      border-bottom: 2px solid #dee6eb;
+      background-color: transparent;
+    }
+    
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      outline: none;
+      border-bottom: 2px solid #007bff;
+    }
+    
+    .eye-icon {
+      position: absolute;
+      top: 50%;
+      right: 8px;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+    
+    .eye-icon::before {
+      content: "\f070";
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      font-size: 20px;
+      color: #ccc;
+    }
+    
+    .eye-icon.open::before {
+      content: "\f06e";
+      color: #4caf50;
+    }
+    
+    button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+    }
+    
+    button:hover {
+      background-color: #0056b3;
+    }
+    
+    .signup-link,
+    .forgot-password-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    .signup-link a,
+    .forgot-password-link a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    
+    .signup-link a:hover,
+    .forgot-password-link a:hover {
+      text-decoration: underline;
+    }
+    
+    .clipart {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+    
+    .clipart img {
+      max-width: 100%;
+      height: auto;
+    }
+    
+    @media screen and (min-width: 768px) {
+      .login {
+        flex-direction: row;
+      }
+      .clipart {
+        margin-right: 20px;
+        margin-bottom: 0;
+      }
+      .form-group {
+        flex-basis: calc(50% - 20px); /* Adjusted */
+        margin-right: 20px; /* Added */
+      }
+    }
+    </style>
+    
+<div class="page-Login">
+  <div class="login-content">Bundelkhand University Alumini Association</div>
+  <div class="login animatedParent">
+    <div class="clipart">
+      <img src="{% static 'profiles/Img/Bundelkhand_University_Logo.avif' %}" alt="Clipart">
+    </div>
+    <form class="form-login" method="post">
+      {% csrf_token %}
+      <h2>Login Manually</h2>
+      <div class="form-group">
+        <input type="text" name="username" placeholder="username *">
+      </div>
+      <div class="form-group">
+        <input type="password" name="password" placeholder="Password *">
+      </div>
+     
+      <div class="form-group">
+      <button type="submit">Login</button>
+      </div>
+      <div class="signup-link">
+        <span>Don't have an account? <a href="{% url 'register' %}">Sign Up</a></span>
+      </div>
+      <div class="forgot-password-link">
+        <a href="{% url 'reset_password' %}">Forgot Password?</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const togglePassword = document.querySelector(".toggle-password");
+    const passwordField = document.querySelector(togglePassword.getAttribute("toggle"));
+
+    togglePassword.addEventListener("click", function () {
+      const type = passwordField.getAttribute("type") === "password" ? "text" : "password";
+      passwordField.setAttribute("type", type);
+      this.classList.toggle("open");
+    });
+  });
+</script>
+{% endblock %}

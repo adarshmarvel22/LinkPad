@@ -1,0 +1,202 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block nav %}
+    {% include 'nav.html' %}
+{% endblock nav %}
+
+{% block content %}
+{%load static%}
+<style>
+   .container{
+    margin-top:12px;
+   }
+    .card {
+        background: #f0f0f0;
+        border-radius: 15px;
+        box-shadow: 5px 5px 15px #b8b8b8, 
+                    -5px -5px 15px #ffffff;
+                    border: 2px solid #0f0f30;
+    }
+    
+    .card-body {
+        padding: 20px;
+    }
+    
+    .card-title {
+        color: #333;
+    }
+    
+    .card-text {
+        color: #666;
+    }
+    
+    .btn {
+        border-radius: 10px;
+    }
+    
+    .btn-outline-secondary {
+        border-color: #ccc;
+    }
+    
+    .btn-outline-secondary:hover {
+        background: #ccc;
+        color: #fff;
+    }
+    
+    .text-muted {
+        color: #999;
+    }
+    
+    .profile-image {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .follow-box {
+        background: #f0f0f0;
+        border-radius: 10px;
+        box-shadow: 5px 5px 15px #b8b8b8, 
+                    -5px -5px 15px #ffffff;
+        border: none;
+        padding: 20px;
+    }
+    
+    .post-box {
+        background: #fc9e36;
+        border-radius: 15px;
+        box-shadow: 5px 5px 15px #c6a2a2, -5px -5px 15px #ffffff;
+        border: 3px solid;
+        padding: 20px;
+    }
+    
+    
+    .spinner-border {
+        color: #17a2b8;
+    }
+    
+    .spinner-border:not(:last-child) {
+        margin-right: 5px;
+    }
+    
+    .not-visible {
+        display: none;
+    } 
+    .text-muted{
+        color:#000 !important;
+        font-weight:600;
+    }
+    .btn-sm{
+        margin-top: 20px;
+        background-color: #ffc107;
+        outline: none;
+        border: none;
+        border-radius: 4rem;
+        font-size: 1.1rem;
+        cursor: pointer;
+        font-weight: 600;
+        color: black;
+        transition: 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .btn-sm:hover{
+        background:#161691;
+        color:white;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <img src="{{ user.profile.image.url }}" alt="Profile Image" class="img-fluid rounded-circle profile-image mb-3">
+                    <h4 class="card-title">{{ request.user.username }}</h4>
+                    <p class="card-text text-muted">{{ bio }}</p>
+                    <div class="d-flex justify-content-between">
+                        <button class="btn btn-outline-secondary btn-sm" onclick="logout()">Logout</button>
+                        <button class="btn btn-outline-secondary btn-sm" onclick="editProfile()">Edit Profile</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card mt-3 follow-box">
+                <div class="card-body">
+                    <h5 class="card-title">Followers</h5>
+                    <div class="text-center">
+                        <h6>{{ followers }}</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5 class="card-title">Clubs</h5>
+                    <ul class="list-group list-group-flush">
+                        <!-- Add user's clubs dynamically here -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="card post-box">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <h6>{{ no_posts }}</h6>
+                                <p class="text-muted">Posts</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <h6>{{ followers }}</h6>
+                                <p class="text-muted">Followers</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <h6>{{ following }}</h6>
+                                <p class="text-muted">Connections</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="posts" class="mt-3"></div>
+            <div class="text-center mt-3" id="spinner">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only"></span>
+                </div>
+            </div>
+            <div class="text-center mt-3" id="load-more">
+                <button class="btn btn-outline-info" onclick="loadMore()">Load More</button>
+            </div>
+            <div class="card border-0 mt-3">
+                <div class="alert alert-info not-visible" id="end-block"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'profiles/index.js' %}"></script>
+<script>
+    function logout() {
+        window.location.href = "{% url 'logout' %}";
+    }
+
+    function editProfile() {
+        window.location.href = "{% url 'edit_profile' username=request.user.username %}";
+    }
+
+    function loadMore() {
+        // Add your load more logic here
+    }
+</script>
+{% endblock scripts %}

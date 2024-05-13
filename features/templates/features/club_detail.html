@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block nav %}
+{% include 'nav.html' %}
+{% endblock nav %}
+
+{% block content %}
+    <style>
+        /* Container styling */
+        .club_update {
+            width: 90%;
+            {% comment %} max-width: 500px; {% endcomment %}
+            border:2px solid ;
+            margin: 20px auto;
+            padding: 20px;
+            background: #f9f9f9; /* Slightly lighter background for better contrast */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Heading styling */
+        .club_update h1 {
+            font-size: 28px; /* Slightly larger font size for emphasis */
+            margin-bottom: 15px; /* Increased margin for better spacing */
+            color: #333;
+            text-align: center; /* Center-align the heading */
+        }
+        
+        /* Description and meta styling */
+        .club_update p {
+            font-size: 18px; /* Increased font size for better readability */
+            margin-bottom: 10px; /* Increased margin for better spacing */
+            color: #555; /* Slightly darker text color for better contrast */
+            line-height: 1.5; /* Improved line spacing for better readability */
+            word-wrap: break-word; /* Ensure long words wrap to next line */
+        }
+    
+        /* Decorative styling for fields */
+        .field_wrapper {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f0f0f0; /* Light gray background */
+            border-radius: 5px;
+            overflow: hidden; /* Ensure content doesn't overflow the container */
+        }
+        
+        /* Action link styling */
+        .club_update a {
+            display: inline-block;
+            padding: 10px 20px; /* Slightly increased padding for better clickability */
+            margin-top: 15px; /* Increased top margin for better spacing */
+            text-decoration: none;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            color: #007bff;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        /* Hover effect for action links */
+        .club_update a:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+        </style>
+        
+        
+
+
+    <div class="club_update">
+        <h1>{{ club.name }}</h1>
+        <div class="field_wrapper"> <!-- Description field wrapper -->
+            <p>Description: {{ club.description }}</p>
+        </div>
+        <div class="field_wrapper"> <!-- Added By field wrapper -->
+            <p>Added by: {{ club.added_by }}</p>
+        </div>
+        <div style="text-align: center;"> <!-- Center-align action links -->
+            <a href="{% url 'features:club_update' pk=club.pk %}">Update Club</a>
+            <a href="{% url 'features:club_delete' pk=club.pk %}">Delete Club</a>
+        </div>
+    </div>
+    
+    
+
+
+{% endblock content %}

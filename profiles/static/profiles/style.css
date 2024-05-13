@@ -1,0 +1,400 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Reem Kufi", sans-serif !important;
+  }
+nav{
+  display: flex;
+  height: 80px;
+  width: 100%;
+  /* background: #1b1b1b; */
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px 0 100px;
+  flex-wrap: wrap;
+}
+nav .logo{
+  /* color: #fff; */
+  color: #111;
+  font-size: 35px;
+  font-weight: 600;
+}
+nav ul{
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+}
+nav ul li{
+  margin: 0 5px;
+}
+nav ul li a{
+  /* color: #f2f2f2; */
+  color: #111;
+  text-decoration: none;
+  font-family: "Reem Kufi", sans-serif !important;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 8px 15px;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+nav ul li a.active,
+nav ul li a:hover{
+  color: #111;
+  background: #fff;
+}
+nav .menu-btn i{
+  color: #111;
+  font-size: 22px;
+  cursor: pointer;
+  display: none;
+}
+input[type="checkbox"]{
+  display: none;
+}
+@media (max-width: 1000px){
+  nav{
+    padding: 0 40px 0 50px;
+  }
+}
+@media (max-width: 920px) {
+  nav .menu-btn i{
+    display: block;
+  }
+  #click:checked ~ .menu-btn i:before{
+    content: "\f00d";
+  }
+  nav ul{
+    position: fixed;
+    top: 80px;
+    left: -100%;
+    background: #ffff;
+    height: 100vh;
+    width: 100%;
+    text-align: center;
+    display: block;
+    transition: all 0.3s ease;
+  }
+  #click:checked ~ ul{
+    left: 0;
+  }
+  nav ul li{
+    width: 100%;
+    margin: 40px 0;
+  }
+  nav ul li a{
+    width: 100%;
+    margin-left: -100%;
+    display: block;
+    font-size: 20px;
+    transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  #click:checked ~ ul li a{
+    margin-left: 0px;
+  }
+  nav ul li a.active,
+  nav ul li a:hover{
+    background: none;
+    color: rgb(255, 191, 0);
+  }
+}
+/* .content{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: -1;
+  width: 100%;
+  padding: 0 30px;
+  color: #1b1b1b;
+}
+.content div{
+  font-size: 40px;
+  font-weight: 700;
+} */
+
+
+/* Nav Css end  */
+
+
+/* Home css  */
+
+.Home-cont {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.Home-content {
+    flex: 1;
+    padding: 20px;
+}
+.Home-content h1{
+    font-size: clamp(4.5rem, 5vw, 4rem);
+    color: #08184e;
+    margin-top: 68px;
+}
+.Home-content p{
+    color: #6a6a6a;
+    margin: 8px;
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    max-width: 500px;
+    /* font-size: 17px; */
+    line-height: 28px;
+    text-align: justify;
+}
+.Home-btn{
+    margin-top: 20px;
+    padding: 1rem 2.5rem;
+    background-color: #000829;
+    outline: none;
+    border: none;
+    border-radius: 5rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: white;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Home-btn:hover{
+    background-color: goldenrod;
+}
+.Home-btn svg{
+    margin-left: 0.75rem;
+    font-size: 1.5rem;
+}
+.Home-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Home-image img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .Home-cont {
+        flex-direction: column;
+    }
+    
+    .Home-content, .Home-image {
+        flex: none;
+        width: 100%;
+    }
+}
+
+/* Home css emd  */
+
+/* About us css  */
+.About-Home {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.About-Home-content {
+    flex: 1;
+    padding: 20px;
+    order: 2; /* Initially, About-Home-content appears before image-About */
+    margin-top: 68px;
+}
+.About-Home-content h1{
+    font-size: clamp(4.5rem, 5vw, 4rem);
+    color: #08184e;
+   
+}
+.About-Home-content p{
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    max-width: 500px;
+    color: #6a6a6a;
+    text-align: justify;
+    line-height: 36px;
+    margin: 1.5rem 0rem;
+}
+.image-About {
+    flex: 1;
+    order: 1; /* Initially, image-About appears after About-Home-content */
+}
+
+@media screen and (max-width: 768px) {
+    .About-Home {
+        flex-direction: column-reverse; /* Stack image-About on top in mobile view */
+    }
+    
+    .About-Home-content, .image-About {
+        flex: none; /* Reset flex basis */
+        width:50%; /* Full width */
+        order: initial; /* Reset order */
+    }
+}
+
+    
+    .image-About {
+        flex: 1;
+        position: relative;
+        order: 1; /* Initially, image-About appears after About-Home-content */
+    }
+
+    .image-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 100%;
+    }
+    
+    @media screen and (max-width: 768px) {
+        .About-Home {
+            flex-direction: column-reverse; /* Stack elements vertically in mobile view */
+        }
+        
+        .About-Home-content, .image-About {
+            flex: none; /* Reset flex basis */
+            width: 100%; /* Full width */
+            order: initial; /* Reset order */
+        }
+    }
+
+/* /* Alumini css  */
+
+.aluni-text{
+    margin-top: 65px;
+    text-align: center;
+}
+
+
+
+/* Footer css  */
+.footer {
+    position: relative;
+    width: 100%;
+    background: #10182F;
+
+  }
+  
+  .footer .footer-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 3.5rem;
+    padding: 60px;
+  }
+  
+  .footer-row .footer-col h4 {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 400;
+  }
+  
+  .footer-col .links {
+    margin-top: 20px;
+  }
+  
+  .footer-col .links li {
+    list-style: none;
+    margin-bottom: 10px;
+  }
+  
+  .footer-col .links li a {
+    text-decoration: none;
+    color: #bfbfbf;
+  }
+  
+  .footer-col .links li a:hover {
+    color: #fff;
+  }
+  
+  .footer-col p {
+    margin: 20px 0;
+    color: #bfbfbf;
+    max-width: 300px;
+  }
+  
+  .footer-col form {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .footer-col input {
+    height: 40px;
+    border-radius: 6px;
+    background: none;
+    width: 100%;
+    outline: none;
+    border: 1px solid #7489C6 ;
+    caret-color: #fff;
+    color: #fff;
+    padding-left: 10px;
+  }
+  
+  .footer-col input::placeholder {
+    color: #ccc;
+  }
+  
+   .footer-col form button {
+    background: #fff;
+    outline: none;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.2s ease;
+  }
+  
+  .footer-col form button:hover {
+    background: #cecccc;
+  }
+  
+  .footer-col .icons {
+    display: flex;
+    margin-top: 30px;
+    gap: 30px;
+    cursor: pointer;
+  }
+  
+  .footer-col .icons i {
+    color: #afb6c7;
+  }
+  
+  .footer-col .icons i:hover  {
+    color: #fff;
+  }
+  
+  @media (max-width: 768px) {
+    .footer {
+      position: relative;
+      bottom: 0;
+      left: 0;
+      transform: none;
+      width: 100%;
+      border-radius: 0;
+    }
+  
+    .footer .footer-row {
+      padding: 20px;
+      gap: 1rem;
+    }
+  
+    .footer-col form {
+      display: block;
+    }
+  
+    .footer-col form :where(input, button) {
+      width: 100%;
+    }
+  
+    .footer-col form button {
+      margin: 10px 0 0 0;
+    }
+  }
+
+/* footer css end  */

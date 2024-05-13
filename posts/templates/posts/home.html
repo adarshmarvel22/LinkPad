@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block nav %}
+{% include 'nav.html' %}
+{% endblock nav %}
+
+{% block content %}
+{%load static%}
+<style>
+    .profile-card {
+        background: #f0f0f0;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+        position: sticky;
+        top: 20px; /* Adjust this value as needed */
+        z-index: 999; /* Ensure profile card appears above post cards */
+    }
+    .profile-img {
+        border-radius: 50%;
+    }
+
+    .post-card {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-top: 20px; /* Ensure some space between the fixed cards and post cards */
+    }
+    
+
+    /* Neuromorphic styling for club cards */
+    .club-card {
+        background: #f0f0f0;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+        position: sticky;
+        top: 20px; /* Adjust this value as needed */
+        z-index: 999; /* Ensure club cards appear above post cards */
+    }
+    .home-profile-pic {
+        width: 100%;
+}
+ .btn-primary{
+    margin-top: 20px;
+    {% comment %} padding: 1rem 2.5rem; {% endcomment %}
+    background-color: #000829;
+    outline: none;
+    border: none;
+    border-radius: 5rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: white;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-primary:hover{
+    background:#e9a43d;
+}
+</style>
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- Profile Cards on the left -->
+        <div class="col-md-3">
+            <!-- Profile card example -->
+            <div class="card mb-3 profile-card">
+                <img src="{{ user.profile.image.url }}" class="card-img-top profile-img" alt="Profile Image">
+                <div class="card-body">
+                    <h5 class="card-title">{{ request.user.username }}</h5>
+                    <p class="card-text">{{ bio }}</p>
+                    <a href="{% url 'user_profile' %}" class="btn btn-primary">View Profile</a>
+                </div>
+            </div>
+            
+            <!-- Add more profile cards as needed -->
+        </div>
+        <!-- Post Feature in the center -->
+        <div class="col-md-6">
+            <!-- Post content dynamically loaded here -->
+            <div id="posts"></div>
+            <div class="card border-0">
+               
+                <div class="modal fade background-0" id="exampleModal" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Delete Post</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Confirm delete
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <a href="" id="delete-link" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center" id="spinner">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only"></span>
+                </div>
+            </div> 
+        </div>
+        <!-- Club Cards on the right -->
+        <div class="col-md-3">
+            <!-- Coding Club Cards -->
+            <div class="card mb-3 club-card">
+                <div class="card-body">
+                    <h5 class="card-title"> Club</h5>
+                    <p class="card-text">Club Description</p>
+                    <a href="{% url 'features:club_list' %}" class="btn btn-primary">join Club</a>
+                </div>
+            </div>
+            <!-- Data Science Club Cards -->
+            <div class="card mb-3 club-card">
+                <div class="card-body">
+                    <h5 class="card-title">See jobs</h5>
+                    <p class="card-text">search for new job</p>
+                    <a href="{% url 'features:job_list' %}" class="btn btn-primary">Search Job</a>
+                </div>
+            </div>
+            <!-- Jobs (Apply Now) Cards -->
+            <div class="card club-card">
+                <div class="card-body">
+                    <h5 class="card-title">See Events</h5>
+                    <p class="card-text">Apply for new events</p>
+                    <a href="{% url 'features:event_list' %}" class="btn btn-primary">Join Event</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'posts/index.js' %}"></script>
+{% endblock scripts %}

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Detail</title>
+</head>
+<body>
+    <h1>{{ resource.name }}</h1>
+    <p>Description: {{ resource.description }}</p>
+    <p>Uploaded by: {{ resource.added_by }}</p>
+    <p><a href="{{ resource.file.url }}">Download File</a></p>
+    <a href="{% url 'features:resources_update' pk=resource.pk %}">Update Resource</a>
+    <a href="{% url 'features:resources_delete' pk=resource.pk %}">Delete Resource</a>
+</body>
+</html>

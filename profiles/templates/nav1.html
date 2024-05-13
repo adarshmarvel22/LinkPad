@@ -1,0 +1,45 @@
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="{% static 'profiles/style.css' %}">
+<nav>
+    <div class="logo">
+        <img src="{% static 'profiles/Img/l.svg' %}" >
+    </div>
+    <input type="checkbox" id="click">
+    <label for="click" class="menu-btn">
+        <i class="fas fa-bars"></i>
+    </label>
+    <ul>
+        {% if request.user.is_authenticated %}
+        <li><a class="active" href="{% url 'home' %}">Feed</a></li>
+        {%else%}
+        <li><a class="active" href="{% url 'homepage' %}">Home</a></li>
+
+        {% endif %}
+        <li><a href="#">AboutAlumini</a></li>
+        <li><a href="{% url 'features:hall_of_fame_list' %}">hall_of_fame</a></li>
+        <li><a href="#">Jobs</a></li>
+        <li><a href="#">Gallery</a></li>
+        {% if request.user.is_authenticated %}
+        <a class="nav-link" href="{% url 'user_profile' %}">
+          <img
+            src="{{ user.profile.image.url }}"
+            alt="Profile Avatar"
+            class="rounded-circle"
+            style="width: 40px; height: 40px"
+          />
+        </a>
+        {%else%}
+        <li><a href="{% url 'login' %}">Login</a></li>
+
+        {% endif %}
+    </ul>
+    {% comment %} <ul>
+        <li><a class="active" href="#">Home</a></li>
+        <li><a href="#">AboutAlumini</a></li>
+        <li><a href="#">Jobs</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="{% url 'registor' %}">SignUp</a></li>
+    </ul> {% endcomment %}
+</nav>

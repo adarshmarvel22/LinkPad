@@ -1,0 +1,96 @@
+{%load static%}
+{% include 'nav.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Detail</title>
+    <style>
+        .container-job-detail {
+            margin-top: 80px;
+            display: flex;
+        }
+        .center-text {
+            text-align: center;
+        }
+
+        .container-job-detail {
+            background-color: #fff9d6;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 90%;
+            margin: 20px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .job-detail {
+            margin-top: 20px;
+        }
+
+        .job-detail h2 {
+            color: #555;
+        }
+
+        .job-detail p {
+            color: #777;
+        }
+        .neumorphic-button {
+            background: #f0f0f0;
+            color: #161691;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px #bebebe,
+                        -5px -5px 10px #ffffff;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-bottom:10px;
+            transition: all 0.3s ease;
+            margin-right: 10px; /* Add margin between buttons */
+        }
+    
+        .neumorphic-button:hover {
+            box-shadow: 2px 2px 5px #bebebe,
+                        -2px -2px 5px #ffffff;
+
+        }
+        @media screen and (max-width: 768px) {
+            .container-job-detail {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-text"><h1 style="text-align:center;">{{ job.title }}</h1></div>
+<div class="container-job-detail">
+
+    <div class="job-detail">
+        <h2>Description:</h2>
+        <p>{{ job.description }}</p>
+        <h2>Company:</h2>
+        <p>{{ job.company }}</p>
+        <h2>Location:</h2>
+        <p>{{ job.location }}</p>
+        <h2>Experience:</h2>
+        <p>{{ job.experience }}</p>
+        <h2>Added By:</h2>
+        <p>{{ job.added_by }}</p>
+        <h2>Date Added:</h2>
+        <p>{{ job.date_added }}</p>
+    </div>
+</div>
+{% comment %} <a href="{% url 'features:job_update' pk=job.pk %}">Update Job</a>
+<a href="{% url 'features:job_delete' pk=job.pk %}">Delete Job</a> {% endcomment %}
+<div class="neumorphic-container" style = "margin-left: 39rem;">
+    <a href="{% url 'features:job_update' pk=job.pk %}" class="neumorphic-button" style="background:blue;color:white; margin:20px" >Update Job</a>
+    <a href="{% url 'features:job_delete' pk=job.pk %}" class="neumorphic-button" style = "background:red; color: white;font-weight:600;">Delete Job</a>
+</div>
+</body>
+</html>

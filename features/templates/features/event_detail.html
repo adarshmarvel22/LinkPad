@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Detail</title>
+</head>
+<body>
+    <h1>{{ event.name }} - {{ event.date }}</h1>
+    <p>Venue: {{ event.venue }}</p>
+    <p>Added by: {{ event.added_by }}</p>
+    <a href="{% url 'features:event_update' pk=event.pk %}">Update Event</a>
+    <a href="{% url 'features:event_delete' pk=event.pk %}">Delete Event</a>
+</body>
+</html>

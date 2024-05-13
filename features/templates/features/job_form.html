@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include 'nav.html'%}
+
+    <title>{% if form.instance.pk %}Update{% else %}Create{% endif %} Job</title>
+    <style>
+        body {
+            font-family: "Reem Kufi", sans-serif !important;
+            background: linear-gradient(to bottom right, #007bff, #ffffff);
+            display: flex;
+            justify-content: center;
+            align-items: center;  
+            margin: 0;
+        }
+        .container12 {
+            background: #ffffff;
+            padding: 40px;
+            border:2px solid;
+            margin-top:5%;
+            margin-bottom:5%;
+            width:60%;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin-left: 176px;
+        }
+
+        .slogan {
+            text-align: center;
+            color: #000829;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            background-color: #f0f2f5;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 8px 8px 16px #cbced1, 
+                        -8px -8px 16px #ffffff;
+        }
+
+        .submit-btn {
+            margin-top: 20px;
+            padding: 1rem 2.5rem;
+            background-color: #161691;
+            outline: none;
+            border: none;
+            border-radius: 5rem;
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-weight: 600;
+            color: white;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 8px 8px 16px #bfc1c4, -8px -8px 16px #ffffff;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #e06e1c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container12">
+        <h1 class="slogan">{% if form.instance.pk %}Update{% else %}Create{% endif %} Job</h1>
+   
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="submit-btn">Save</button>
+        </form>
+    </div>
+</body>
+
+
+{% endblock content %}
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if form.instance.pk %}Update{% else %}Create{% endif %} Job</title>
+</head>
+<body>
+    <h1>{% if form.instance.pk %}Update{% else %}Create{% endif %} Job</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html> {% endcomment %}

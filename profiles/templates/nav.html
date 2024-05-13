@@ -1,0 +1,168 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+  <div class="container">
+    <!-- Logo on the left -->
+    <a class="navbar-brand" href="#">
+      <img
+        src="{% static 'linkpad.png' %}"
+        width="125px"
+        height="50"
+        alt="Logo"
+      />
+    </a>
+
+    <!-- Toggler/collapsible Button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Links and Profile Avatar -->
+    <div
+      class="collapse navbar-collapse justify-content-between"
+      id="navbarNav"
+    >
+      <ul class="navbar-nav">
+        {% if request.user.is_authenticated %}
+        <li class="nav-item">
+          <a href="{% url 'home' %}"
+              class="nav-link"
+              style="
+                color: #111;
+                text-decoration: none;
+                font-family: 'Reem Kufi', sans-serif !important;
+                font-size: 18px;
+                font-weight: 600;
+                padding: 8px 15px;
+                border-radius: 5px;
+                letter-spacing: 1px;
+                transition: all 0.3s ease;
+              "
+            >
+              <i class="fas fa-home"></i> Feed
+            </a>
+          </li>
+
+{% else %}
+<li class="nav-item">
+  <a href="{% url 'homepage' %}"
+      class="nav-link"
+      style="
+        color: #111;
+        text-decoration: none;
+        font-family: 'Reem Kufi', sans-serif !important;
+        font-size: 18px;
+        font-weight: 600;
+        padding: 8px 15px;
+        border-radius: 5px;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+      "
+    >
+      <i class="fas fa-home"></i> Home
+    </a>
+  </li>
+        {% endif %}
+
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="{% url 'search' %}"
+            style="
+              color: #111;
+              text-decoration: none;
+              font-family: 'Reem Kufi', sans-serif !important;
+              font-size: 18px;
+              font-weight: 600;
+              padding: 8px 15px;
+              border-radius: 5px;
+              letter-spacing: 1px;
+              transition: all 0.3s ease;
+            "
+          >
+            <i class="fas fa-code"></i> Coding Club
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="{% url 'jobs' %}"
+            style="
+              color: #111;
+              text-decoration: none;
+              font-family: 'Reem Kufi', sans-serif !important;
+              font-size: 18px;
+              font-weight: 600;
+              padding: 8px 15px;
+              border-radius: 5px;
+              letter-spacing: 1px;
+              transition: all 0.3s ease;
+            "
+          >
+            <i class="fas fa-bell"></i> Jobs
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="{% url 'features:resources_list' %}"
+            style="
+              color: #111;
+              text-decoration: none;
+              font-family: 'Reem Kufi', sans-serif !important;
+              font-size: 18px;
+              font-weight: 600;
+              padding: 8px 15px;
+              border-radius: 5px;
+              letter-spacing: 1px;
+              transition: all 0.3s ease;
+            "
+          >
+            <i class="fas fa-code"></i>  Resources
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="{% url 'new-post' %}"
+            style="
+              color: #111;
+              text-decoration: none;
+              font-family: 'Reem Kufi', sans-serif !important;
+              font-size: 18px;
+              font-weight: 600;
+              padding: 8px 15px;
+              border-radius: 5px;
+              letter-spacing: 1px;
+              transition: all 0.3s ease;
+            "
+          >
+            <i class="fas fa-edit"></i> Post
+          </a>
+        </li>
+        
+      </ul>
+
+      <!-- Profile Avatar on the right -->
+      <div class="navbar-nav ml-lg-auto">
+        {% if request.user.is_authenticated %}
+        <a class="nav-link" href="{% url 'user_profile' %}">
+          <img
+            src="{{ user.profile.image.url }}"
+            alt="Profile Avatar"
+            class="rounded-circle"
+            style="width: 40px; height: 40px"
+          />
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>

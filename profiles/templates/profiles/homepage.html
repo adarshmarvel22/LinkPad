@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Responsive Navigation Menu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'profiles/style.css' %}">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <img src="{% static 'profiles/Img/l.svg' %}" >
+        </div>
+        <input type="checkbox" id="click">
+        <label for="click" class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <ul>
+            {% if request.user.is_authenticated %}
+            <li><a class="active" href="{% url 'home' %}">Feed</a></li>
+            {%else%}
+            <li><a class="active" href="{% url 'homepage' %}">Home</a></li>
+
+            {% endif %}
+            <li><a href="#">AboutAlumini</a></li>
+            {% if request.user.is_authenticated %}
+            <li><a href="{% url 'features:hall_of_fame_list' %}">hall_of_fame</a></li>
+            {%else%}
+            <li><a class="active" href="{% url 'login' %}">hall_of_fame</a></li>
+            {% endif %}
+
+            {% if request.user.is_authenticated %}
+            <li><a href="{%url 'features:job_list'%}">Jobs</a></li>
+            {%else%}
+            <li><a class="active" href="{% url 'login' %}">Jobs</a></li>
+            {% endif %}
+
+            <li><a href="#">Gallery</a></li>
+
+            {% if request.user.is_authenticated %}
+            <a class="nav-link" href="{% url 'user_profile' %}">
+              <img
+                src="{{ user.profile.image.url }}"
+                alt="Profile Avatar"
+                class="rounded-circle"
+                style="width: 40px; height: 40px"
+              />
+            </a>
+            {%else%}
+            <li style="text-decoration: underline;"><a href="{% url 'login' %}">Login/Signup</a></li>
+
+            {% endif %}
+        </ul>
+        {% comment %} <ul>
+            <li><a class="active" href="#">Home</a></li>
+            <li><a href="#">AboutAlumini</a></li>
+            <li><a href="#">Jobs</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="{% url 'registor' %}">SignUp</a></li>
+        </ul> {% endcomment %}
+    </nav>
+
+    <!-- Home start -->
+    <div class="Home-cont">
+        <div class="Home-content">
+            <h1 class="primary-heading">Bridging The gap between Talent, Colleges, and Alumni</h1>
+            <p>
+                By working together, talent, colleges, & alumni can make a difference in the world and build a better future for everyone.
+            </p>
+            <button class="Home-btn">Explore Now <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
+        </div>
+        <div class="Home-image">
+            <img src="{% static 'profiles/Img/college.webp' %}" alt="Home-image">
+        </div>
+    </div>
+    <!-- Home end -->
+
+    <!-- About us -->
+    <div class="About-Home">
+        <div class="image-About">
+            <img src="{% static 'profiles/Img/about-b.png' %}" alt="image-About">
+            <img class="image-overlay" src="{% static 'profiles/Img/uni.webp' %}" alt="image-overlay">
+        </div>
+        <div class="About-Home-content">
+            <h2>About us</h2>
+            <h1>Bundelkhand University Alumni Association</h1>
+            <p>
+                The Bundelkhand University Alumni Association is a vibrant and active community that brings together graduates of Bundelkhand University from various disciplines and years. Committed to fostering lifelong connections, the association serves as a bridge between alumni and the alma mater, creating a network that extends beyond the academic years.
+            </p>
+            <h1 style="font-size: clamp(-2.5rem, 5vw, 2rem);">Message</h1>
+            <p>Joining the Bundelkhand University Alumni Association offers opportunities to reconnect with former classmates, stay updated on university developments, and contribute to the success of future generations. Whether you are a recent graduate or a seasoned professional, your involvement is valued.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <section class="footer">
+        <div class="footer-row">
+            <div class="footer-col">
+                <h4>Info</h4>
+                <ul class="links">
+                    <li><a href="href="{% url 'home' %}"">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    
+                    <li><a href="#">Jobs</a></li>
+                    <li><a href="#">Feed</a></li>
+                    <li><a href="#">BU Gallery </a></li>
+                    <li><a href="#">Students</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Bundelkhand University</h4>
+                <ul class="links">
+                    <li><a href="#">Connect</a></li>
+                    <li><a href="#">Learn</a></li>
+                    <li><a href="#">BUAAC</a></li>
+                    <li><a href="#">Pride Alumini</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Info@bu.com</h4>
+                <ul class="links">
+                    <li><a href="#">Bu Academics</a></li>
+                    <li><a href="#">Computer Science </a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Newsletter</h4>
+                <p>
+                    Bundelkhand University Alumini Association Welcome You to connect with us.
+                    <div class="icons">
+                        <i class="fab fa-facebook-f"></i>
+                        <i class="fab fa-twitter"></i>
+                        <i class="fab fa-linkedin"></i>
+                        <i class="fab fa-github"></i>
+                    </div>
+                </p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

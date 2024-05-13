@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource List</title>
+</head>
+<body>
+    <h1>Resource List</h1>
+    <ul>
+        {% for resource in resources %}
+            <li><a href="{% url 'features:resources_detail' pk=resource.pk %}">{{ resource.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'features:resources_create' %}">Upload New Resource</a>
+</body>
+</html>
