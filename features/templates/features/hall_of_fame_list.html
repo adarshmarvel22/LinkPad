@@ -109,6 +109,22 @@
             font-size: 24px;
             color: gold;
         }
+        #bt2{
+            margin-top: 20px;
+            padding: 1rem 2.5rem;
+            background-color: #000829;
+            outline: none;
+            border: none;
+            border-radius: 5rem;
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-weight: 600;
+            color: white;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
@@ -136,7 +152,7 @@
         </div>
         {% endfor %}
         {% if user.is_staff or user.is_superuser %}
-        <a class="create-link" href="{% url 'features:hall_of_fame_create' %}">Add New Alumni</a>
+        <a class="create-link" id = "bt2" href="{% url 'features:hall_of_fame_create' %}">Add New Alumni</a>
     {% endif %}
     </div>
 </body>
