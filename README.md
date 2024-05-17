@@ -1,55 +1,82 @@
-## Django LinkPAd
-LinkPAd clone using python django with a lot of LinkPAd features.
+# Linkpad
 
-## Preview
-![Home Page](https://github.com/MurariSabavath/LinkPAd-clone/blob/d7d525fc867b9192c66f28e729e3ce1b365bb836/img/home.png)
-![Profile Page](https://github.com/MurariSabavath/LinkPAd-clone/blob/d7d525fc867b9192c66f28e729e3ce1b365bb836/img/profile.png)
+## Description
 
-#### Give a star if you like it.
-## Features
-- User authentication(Sign up and sign in).
-- Password Reset using email.
-- Posting Images.
-- Like and comment on a post.
+Linkpad is a web application that provides a platform for students, alumni, and staff to connect and interact within the educational institution's community. The application allows users to create profiles based on their role (Student, Alumni, Staff), showcasing their achievements, interests, and professional backgrounds.
 
-### Installation
-- Make sure Python is installed.
-- Clone the repository and change your directory to LinkPAd_clone.
-- Install requirements using following command.
-```
-pip install -r requiremnts.txt
-```
-### Usage
-- Create a ``.env`` file.
-- Declare following environment variables in the .env file.
-```
-> SECRET_KEY = 'secret key'
-> DEBUG = True
-> EMAIL_USERNAME = 'your email address'
-> EMAIL_PASSWORD = 'your password' 
-```
-- Now make the migrations.
-```
-python manage.py migrate
-```
-- Commit the migrations.
-```
-python manage.py makemigrations
-```
-- Create a super user.
-```
-python manage.py createsuper
-```
-- Run the app.
-```
-python manage.py runserver
-```
-- Open the app at `localhost:8000` or `http://127.0.0.1:8000/`
+## Installation
 
-## Contact Me 
-### Murari Sabavath
+1. **Clone the repository:**
+    ```sh
+    git clone <repository_url>
+    ```
+2. **Navigate to the project directory:**
+    ```sh
+    cd linkpad
+    ```
+3. **Create a virtual environment (optional but recommended):**
+    ```sh
+    python3 -m venv env
+    ```
+4. **Activate the virtual environment:**
+    - On Windows:
+        ```sh
+        env\Scripts\activate
+        ```
+    - On macOS and Linux:
+        ```sh
+        source env/bin/activate
+        ```
+5. **Install dependencies:**
+    ```sh
+    pip install -r requirements.txt
+    ```
 
-[Github](https://github.com/MurariSabavath) <br> 
-[LinkPAd](https://www.LinkPAd.com/murari_sabavath/) <br>
-[Gmail](mailto:murarisabavath3676@gmail.com) <br>
-[Twitter](https://twitter.com/MurariSabavath_) <br>
+## Configuration
+
+1. **Rename the `.env.example` file to `.env`.**
+2. **Update the `.env` file with your configuration settings (database, secret key, etc.).**
+
+## Database Setup
+
+1. **Run database migrations:**
+    ```sh
+    python manage.py migrate
+    ```
+
+## Running the Server
+
+1. **Start the development server:**
+    ```sh
+    python manage.py runserver
+    ```
+2. **Open your web browser and navigate to `http://127.0.0.1:8000/`.**
+
+## Usage
+
+1. **Access the login page at `/login/` and the signup page at `/signup/`.**
+2. **Enter your credentials to log in or sign up for a new account.**
+3. **After logging in, users will be redirected to their respective profile pages based on their roles.**
+
+## Troubleshooting
+
+- If you encounter any issues during installation or setup, make sure you have followed all the steps correctly.
+- If you're facing database-related errors, ensure that your database settings are configured correctly in the `.env` file.
+- For any other technical issues, consult the Django documentation or seek assistance from the project maintainers.
+
+## Contributing
+
+1. **Fork the repository.**
+2. **Create a new branch:**
+    ```sh
+    git checkout -b feature_branch
+    ```
+3. **Make your changes and commit them:**
+    ```sh
+    git commit -m "Add new feature"
+    ```
+4. **Push to the branch:**
+    ```sh
+    git push origin feature_branch
+    ```
+5. **Submit a pull request.**
