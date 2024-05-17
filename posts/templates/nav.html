@@ -90,7 +90,7 @@
                 transition: all 0.3s ease;
               "
             >
-              <i class="fas fa-home"></i> search
+              <i class="fas fa-home"></i> Search
             </a>
           </li>
       
@@ -110,7 +110,7 @@
                   transition: all 0.3s ease;
                 "
               >
-                <i class="fas fa-home"></i> hall_of_fame
+                <i class="fas fa-home"></i> Hall Of Fame
               </a>
             </li>
             <li class="nav-item">
@@ -143,7 +143,24 @@
           border-radius: 5px;
           letter-spacing: 1px;
           transition: all 0.3s ease;
-        " href="#">Recommended Jobs</a></li>
+        " href="{% url 'features:recommend' %}">Recommendations</a></li>
+        
+        {% if request.user.is_authenticated %}      
+        <li class="nav-item">
+          <a class="nav-link"
+          style="
+            color: #111;
+            text-decoration: none;
+            font-family: 'Reem Kufi', sans-serif !important;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 5px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+          " href="{% url 'chat' %}">Chat</a>
+        </li>
+        {% endif %}
 </ul>
       <!-- Profile Avatar on the right -->
       <div class="navbar-nav ml-lg-auto">

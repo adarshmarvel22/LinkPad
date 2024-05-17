@@ -3,7 +3,7 @@
 
 
 {% block nav %}
-{% include 'nav.html' %}
+
 {% endblock nav %}
 
 {% block content %}
@@ -11,7 +11,7 @@
         /* Container styling */
         .club_update {
             width: 90%;
-            {% comment %} max-width: 500px; {% endcomment %}
+           
             border:2px solid ;
             margin: 20px auto;
             padding: 20px;
@@ -78,8 +78,10 @@
             <p>Added by: {{ club.added_by }}</p>
         </div>
         <div style="text-align: center;"> <!-- Center-align action links -->
+            {% if user.is_staff %}
             <a href="{% url 'features:club_update' pk=club.pk %}">Update Club</a>
             <a href="{% url 'features:club_delete' pk=club.pk %}">Delete Club</a>
+            {%endif%}
         </div>
     </div>
     

@@ -6,11 +6,13 @@ from .views import *
 
 urlpatterns = [
     path('homepage/', homepage , name='homepage'),
+    path('chat/', chat , name='chat'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('register/', register_view, name='register'),
-    path('search/', search_view, name='search'),
+  path('search/', search_view, name='search'),
     path('search-users/', get_search_users_view, name='search_users'),
+    path('follow-unfollow/', follow_unfollow_view, name='follow_unfollow'),
     path('u/profile-details/<int:user_id>/', user_profile_details_view,
          name='user_profile_details'),
     path('u/profile/<int:user_id>/', current_user_view,

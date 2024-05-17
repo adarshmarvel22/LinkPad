@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Profile Page</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Profile Page" />
+  <link rel="icon" href="favicon.png">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+ <style>
+    body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial, sans-serif';
+  background-color: #f5f5f5;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.profile-card {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+}
+
+.profile-pic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.name {
+  font-size: 2rem;
+  color: #333;
+  margin: 0.5rem 0;
+}
+
+.bio {
+  font-size: 1rem;
+  color: #666;
+  margin: 0;
+  line-height: 1.5;
+}
+
+ </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container">
+      <!-- Logo on the left -->
+      <a class="navbar-brand" href="#">
+        <img src="{% static 'linkpad.png' %}" width="125" height="50" alt="Logo" />
+      </a>
+
+      <!-- Toggler/collapsible Button -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Links and Profile Avatar -->
+      <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+        <ul class="navbar-nav">
+          {% if request.user.is_authenticated %}
+          <li class="nav-item"><a class="active nav-link" style="color: #111; text-decoration: none; font-family: 'Reem Kufi', sans-serif !important; font-size: 18px; font-weight: 600; padding: 8px 15px; border-radius: 5px; letter-spacing: 1px; transition: all 0.3s ease;" href="{% url 'homepage' %}">Home</a></li>
+          {% else %}
+          <li class="nav-item"><a class="active nav-link" style="color: #111; text-decoration: none; font-family: 'Reem Kufi', sans-serif !important; font-size: 18px; font-weight: 600; padding: 8px 15px; border-radius: 5px; letter-spacing: 1px; transition: all 0.3s ease;" href="{% url 'home' %}">Feed</a></li>
+          {% endif %}
+          <li class="nav-item"><a class="nav-link" href="{% url 'features:club_list' %}" style="color: #111; text-decoration: none; font-family: 'Reem Kufi', sans-serif !important; font-size: 18px; font-weight: 600; padding: 8px 15px; border-radius: 5px; letter-spacing: 1px; transition: all 0.3s ease;"><i class="fas fa-code"></i> Clubs</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'features:job_list' %}" style="color: #111; text-decoration: none; font-family: 'Reem Kufi', sans-serif !important; font-size: 18px; font-weight: 600; padding: 8px 15px; border-radius: 5px; letter-spacing: 1px; transition: all 0.3s ease;"><i class="fas fa-bell"></i> Jobs</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'new-post' %}" style="color: #111; text-decoration: none; font-family: 'Reem Kufi', sans-serif !important; font-size: 18px; font-weight: 600; padding: 8px 15px; border-radius: 5px; letter-spacing: 1px; transition: all 0.3s ease;"><i class="fas fa-edit"></i> Post</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'features:resources_list' %}" style="color: #111; text-decoration: none; font-family: 'Reem Kufi', sans-serif !important; font-size: 18px; font-weight: 600; padding: 8px 15px; border-radius: 5px; letter-spacing: 1px; transition: all 0.3s ease;"><i class="fas fa-code"></i> Resources</a></li>
+          <li class="nav-item"><a href="{% url 'search' %}" class="nav-link" style="color: #111; text-decoration: none; font-family: 'Reem Kufi', sans-serif !important; font-size: 18px; font-weight: 600; padding: 8px 15px; border-radius: 5px; letter-spacing: 1px; transition: all 0.3s ease;"><i class="fas fa-home"></i> Search</a></li>
+        </ul>
+
+        <!-- Profile Avatar on the right -->
+        <div class="navbar-nav ml-lg-auto">
+          {% if request.user.is_authenticated %}
+          <a class="nav-link" href="{% url 'user_profile' %}">
+            <img src="{{ user.profile.image.url }}" alt="Profile Avatar" class="rounded-circle" style="width: 40px; height: 40px" />
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="profile-card">
+        <img src="{{ user.profile.image.url }}" alt="Profile Picture" class="profile-pic">
+      <h1 class="name">{{profile.user.username}}</h1>
+      <p class="bio">Bio: {{profile.bio}}</p>
+      <p class="bio">Recoomendations based on your profile and current market trends: {{response}}</p>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

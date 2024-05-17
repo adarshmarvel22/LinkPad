@@ -232,3 +232,52 @@ def logout_view(request):
     logout(request)
     messages.success(request, 'Logout successful')
     return redirect('login')
+
+
+from django.http import JsonResponse
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
+from .models import Profile, Follower
+from django.contrib import messages
+from .forms import UpdateUserForm, UpdateProfileForm
+from django.views.decorators.csrf import csrf_exempt
+
+def is_ajax(request):
+    return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
+
+def get_search_users_view(request):
+    if is_ajax(request=request):
+        username = request.GET.get('username', '')
+        users = User.objects.filter(username__icontains=username)
+        data = []
+        for user in users:
+            is_following = Follower.is_following(user, request.user)
+            item = {
+                'id': user.id,
+                'username': user.username,
+                'profile_pic': user.profile.image.url,
+                'is_following': is_following
+            }
+            data.append(item)
+        return JsonResponse({'data': data[:10]})
+    return JsonResponse({'data': []})
+
+@csrf_exempt
+def follow_unfollow_view(request):
+    if request.method == 'POST':
+        user = User.objects.get(pk=request.POST['user_id'])
+        is_following = Follower.is_following(user, request.user)
+        if is_following:
+            Follower.objects.filter(user=user, followed_by=request.user).delete()
+            follow_status = False
+        else:
+            Follower.objects.create(user=user, followed_by=request.user)
+            follow_status = True
+        followers_count = Follower.followers_count(user)
+        return JsonResponse({'follow': follow_status, 'followers': followers_count})
+
+def search_view(request):
+    return render(request, 'profiles/search.html', context={'title': 'Search'})
+
+def chat(request):
+    return render(request, 'profiles/chat.html')

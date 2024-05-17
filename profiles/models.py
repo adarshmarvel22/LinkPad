@@ -32,22 +32,24 @@ class Profile(models.Model):
             img.save(self.image.path)
 
 
+from django.db import models
+from django.contrib.auth.models import User
+
 class Follower(models.Model):
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='user')
-    followed_by = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='followed_by')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
+    followed_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='followed_by')
 
     def __str__(self):
-        return f"{str(self.user.username)} is followed by {str(self.followed_by)}"
+        return f"{self.user.username} is followed by {self.followed_by.username}"
 
     @staticmethod
     def followers_count(user):
-        return Follower.objects.filter(user=user).all().count()
+        return Follower.objects.filter(user=user).count()
 
     @staticmethod
     def following_count(followed_by):
-        return Follower.objects.filter(followed_by=followed_by).all().count()
+        return Follower.objects.filter(followed_by=followed_by).count()
 
-# followers = Follower.objects.filter(user=user).all().count()
-#     following = Follower.objects.filter(followed_by=user).all().count()
+    @staticmethod
+    def is_following(user, followed_by):
+        return Follower.objects.filter(user=user, followed_by=followed_by).exists()

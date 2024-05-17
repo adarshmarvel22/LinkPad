@@ -1,14 +1,61 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
 {% block nav %}
 {% include 'nav.html' %}
 {% endblock nav %}
 
 {% block content %}
+<style>
+    .container894 {
+        background: #e0e0e0;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top:3%;
+       
+        box-shadow: 5px 5px 15px #bebebe,
+                    -5px -5px 15px #ffffff;
+        border: 2px solid;
+    }
+    
+    .input-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .form-control {
+        flex-grow: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        box-shadow: inset 2px 2px 5px #bebebe,
+                    inset -2px -2px 5px #ffffff;
+        background: #ffff;
+        font-size: 16px;
+    }
+    
+    .btn-primary {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #e0e0e0;
+        color: #333;
+        box-shadow: 2px 2px 5px #bebebe,
+                    -2px -2px 5px #ffffff;
+        cursor: pointer;
+    }
+    
+    .btn-primary:active {
+        box-shadow: inset 2px 2px 5px #bebebe,
+                    inset -2px -2px 5px #ffffff;
+    }
 
-<div class="container">
+    #users-container {
+        margin-top: 20px;
+    }
+</style>
+<div class="container894">
     <div class="input-group">
         <input type="search" id="search-box" class="form-control" placeholder="Search for users"/>
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -16,9 +63,98 @@
     <div id="users-container"></div>
 </div>
 
+<script>
+    const searchBar = document.getElementById('search-box');
+const usersContainer = document.getElementById('users-container');
 
-{% endblock %}
+searchBar.addEventListener('keyup', (e) => {
+    const val = e.target.value;
+    if (val[0] !== " " && val.length > 0) {
+        $.ajax({
+            type: 'GET',
+            url: `/search-users/?username=${val}`,
+            success: function (response) {
+                const data = response.data;
+                usersContainer.innerHTML = "";
+                if (data.length > 0) {
+                    data.forEach(el => {
+                        usersContainer.innerHTML += `
+                            <div class="container border border-lightgrey justify-content-md-center p-3 pb-2 mt-2">
+                                <div class="card-profile p-2">
+                                    <div>
+                                        <img style="height:60px;width:60px" src="${el.profile_pic}" class="home-profile-pic" />
+                                    </div>
+                                    <div>
+                                        <a href="/u/profile/${el.id}/" class="text-dark">
+                                            <h6 class="d-inline">${el.username}</h6>
+                                        </a>
+                                        <button class="btn btn-outline-primary follow-unfollow-btn" data-user-id="${el.id}">
+                                            ${el.is_following ? 'Unfollow' : 'Follow'}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    attachFollowUnfollowEventListeners();
+                } else {
+                    usersContainer.innerHTML = `
+                        <div class="alert alert-info mt-2" role="alert">
+                            No results found!
+                        </div>
+                    `;
+                }
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
+    } else if (val.length == 0) {
+        usersContainer.innerHTML = ""
+    }
+});
+
+const attachFollowUnfollowEventListeners = () => {
+    const followButtons = document.querySelectorAll('.follow-unfollow-btn');
+    followButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const userId = button.getAttribute('data-user-id');
+            $.ajax({
+                type: 'POST',
+                url: `/follow-unfollow/`,
+                data: {
+                    'user_id': userId,
+                    'csrfmiddlewaretoken': csrftoken,
+                },
+                success: function (response) {
+                    button.textContent = response.follow ? 'Unfollow' : 'Follow';
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
+        });
+    });
+};
+
+const getCsrfToken = () => {
+    let token = null;
+    const cookies = document.cookie.split(';');
+    cookies.forEach(cookie => {
+        if (cookie.trim().startsWith('csrftoken=')) {
+            token = cookie.split('=')[1];
+        }
+    });
+    return token;
+};
+
+const csrftoken = getCsrfToken();
+
+</script>
+{% endblock content %}
 
 {% block scripts %}
     <script src="{% static 'profiles/search.js' %}"></script>
 {% endblock scripts %}
+
+

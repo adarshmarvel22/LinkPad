@@ -17,8 +17,8 @@
         <li><a class="active" href="{% url 'homepage' %}">Home</a></li>
 
         {% endif %}
-        <li><a href="#">AboutAlumini</a></li>
-        <li><a href="{% url 'features:hall_of_fame_list' %}">hall_of_fame</a></li>
+  
+        <li><a href="{% url 'features:hall_of_fame_list' %}">Hall of Fame</a></li>
         <li><a href="#">Jobs</a></li>
         <li><a href="#">Gallery</a></li>
         {% if request.user.is_authenticated %}
@@ -35,11 +35,5 @@
 
         {% endif %}
     </ul>
-    {% comment %} <ul>
-        <li><a class="active" href="#">Home</a></li>
-        <li><a href="#">AboutAlumini</a></li>
-        <li><a href="#">Jobs</a></li>
-        <li><a href="#">Gallery</a></li>
-        <li><a href="{% url 'registor' %}">SignUp</a></li>
-    </ul> {% endcomment %}
+
 </nav>

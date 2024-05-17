@@ -116,7 +116,7 @@
     font-size: 36px;
     margin-bottom: 30px;
     text-align: center; 
-    text-decoration: underline;
+
     ">Hall of Fame List</h1>
     <div class="club">
         {% for entry in hall_of_fame %}
@@ -132,8 +132,12 @@
                 <p class="title">Company: {{ entry.company }}</p>
                 <a href="{% url 'features:hall_of_fame_detail' pk=entry.pk %}"class="register-btn">View Profile</a>
             </div>
+
         </div>
         {% endfor %}
+        {% if user.is_staff or user.is_superuser %}
+        <a class="create-link" href="{% url 'features:hall_of_fame_create' %}">Add New Alumni</a>
+    {% endif %}
     </div>
 </body>
 </html>

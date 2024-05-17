@@ -59,7 +59,7 @@
             box-shadow: 2px 2px 5px #bebebe,
                         -2px -2px 5px #ffffff;
 
-        }
+}
         @media screen and (max-width: 768px) {
             .container-job-detail {
                 width: 100%;
@@ -89,8 +89,11 @@
 {% comment %} <a href="{% url 'features:job_update' pk=job.pk %}">Update Job</a>
 <a href="{% url 'features:job_delete' pk=job.pk %}">Delete Job</a> {% endcomment %}
 <div class="neumorphic-container" style = "margin-left: 39rem;">
+    {% if user.is_staff %}
+
     <a href="{% url 'features:job_update' pk=job.pk %}" class="neumorphic-button" style="background:blue;color:white; margin:20px" >Update Job</a>
     <a href="{% url 'features:job_delete' pk=job.pk %}" class="neumorphic-button" style = "background:red; color: white;font-weight:600;">Delete Job</a>
+    {%endif%}
 </div>
 </body>
 </html>

@@ -4,6 +4,9 @@ from .forms import ClubForm, HallOfFameForm, EventForm, ResourcesForm, JobForm
 from django.contrib.auth.decorators import login_required
 
 
+
+
+
 def home(request):
     if not request.user.is_authenticated:
         return redirect('login')
@@ -228,3 +231,37 @@ def job_delete(request, pk):
         job.delete()
         return redirect('features:job_list')
     return render(request, 'features/job_confirm_delete.html',{'job':job})
+
+import pathlib
+import textwrap
+import google.generativeai as genai
+from IPython.display import display
+from IPython.display import Markdown
+import os
+from profiles.models import *
+
+API_KEY=""
+os.environ['GOOGLE_API_KEY']=API_KEY
+
+genai.configure(api_key=os.environ['GOOGLE_API_KEY'])
+
+model_llm = genai.GenerativeModel('gemini-pro')
+
+def recommend(request):
+    user_id=request.user.id
+    user = User.objects.get(pk=user_id)
+    profile = Profile.objects.get(pk=user.profile.pk)
+    print(profile.bio)
+    bio=profile.bio
+    jobs=Job.objects.all()
+    print(jobs)
+    try:
+    #    response = model_llm.generate_content(f"From the jobs in {jobs}, give the jobs that are best suited to the {bio}. Also give insights and skills needed to improve based on current market trends")
+       response=response.text
+    #    pass
+    except:
+       response="There are no jobs as of now"
+    # response="hello"
+    # response=response.text
+    print(response)
+    return render(request, 'features/recommend.html',{'response':response,'profile':profile})

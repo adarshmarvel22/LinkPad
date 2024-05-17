@@ -9,62 +9,55 @@
 {% block content %}
 {%load static%}
 <style>
-    .profile-card {
+
+    .card {
+        border: 2px solid;
+    }
+    .profile-card, .club-card {
         background: #f0f0f0;
         padding: 20px;
         border-radius: 15px;
         box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
         position: sticky;
-        top: 20px; /* Adjust this value as needed */
-        z-index: 999; /* Ensure profile card appears above post cards */
+        top: 20px;
+        z-index: 999;
     }
     .profile-img {
         border-radius: 50%;
     }
-
     .post-card {
         border: 1px solid #ccc;
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        margin-top: 20px; /* Ensure some space between the fixed cards and post cards */
-    }
-    
-
-    /* Neuromorphic styling for club cards */
-    .club-card {
-        background: #f0f0f0;
-        padding: 20px;
-        border-radius: 15px;
-        box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
-        position: sticky;
-        top: 20px; /* Adjust this value as needed */
-        z-index: 999; /* Ensure club cards appear above post cards */
+        margin-top: 20px;
     }
     .home-profile-pic {
         width: 100%;
-}
- .btn-primary{
-    margin-top: 20px;
-    {% comment %} padding: 1rem 2.5rem; {% endcomment %}
-    background-color: #000829;
-    outline: none;
-    border: none;
-    border-radius: 5rem;
-    font-size: 1.1rem;
-    cursor: pointer;
-    font-weight: 600;
-    color: white;
-    transition: 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.btn-primary:hover{
-    background:#e9a43d;
-}
+    }
+    .btn-primary {
+        margin-top: 20px;
+        background-color: #cc1212;
+        outline: none;
+        border: none;
+        border-radius: 5rem;
+        font-size: 1.1rem;
+        cursor: pointer;
+        font-weight: 600;
+        color: white;
+        transition: 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .btn-primary:hover {
+        background: #e9a43d;
+    }
+    .scrollable-posts {
+        height: 80vh; /* Adjust this value as needed */
+        overflow-y: auto;
+    }
 </style>
-
-<div class="container mt-5">
+<div class="container mt-5" style = "      ">
     <div class="row">
         <!-- Profile Cards on the left -->
         <div class="col-md-3">
@@ -77,11 +70,17 @@
                     <a href="{% url 'user_profile' %}" class="btn btn-primary">View Profile</a>
                 </div>
             </div>
-            
+            <div class="card club-card">
+                <div class="card-body">
+                    <h5 class="card-title">See Events</h5>
+                    <p class="card-text">Apply for new events</p>
+                    <a href="{% url 'features:event_list' %}" class="btn btn-primary">Join Event</a>
+                </div>
+            </div>
             <!-- Add more profile cards as needed -->
         </div>
         <!-- Post Feature in the center -->
-        <div class="col-md-6">
+        <div class="col-md-6 scrollable-posts">
             <!-- Post content dynamically loaded here -->
             <div id="posts"></div>
             <div class="card border-0">
@@ -131,13 +130,13 @@
                 </div>
             </div>
             <!-- Jobs (Apply Now) Cards -->
-            <div class="card club-card">
+            <!-- <div class="card club-card">
                 <div class="card-body">
                     <h5 class="card-title">See Events</h5>
                     <p class="card-text">Apply for new events</p>
                     <a href="{% url 'features:event_list' %}" class="btn btn-primary">Join Event</a>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

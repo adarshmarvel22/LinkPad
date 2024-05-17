@@ -103,6 +103,8 @@
             {% endfor %}
         </div>
     </div>
+    {% if user.is_staff %}
     <a href="{% url 'features:job_create' %}" class="register-btn">Create New Job</a>
+    {%endif%}
 </body>
 </html>

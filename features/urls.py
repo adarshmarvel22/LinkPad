@@ -6,6 +6,7 @@ app_name = 'features'
 urlpatterns = [
     # Club URLs
     path('', views.home, name='home'),
+    path('recommend', views.recommend, name='recommend'),
 
     path('club_list/', views.club_list, name='club_list'),
     path('club_detail/<int:pk>/', views.club_detail, name='club_detail'),

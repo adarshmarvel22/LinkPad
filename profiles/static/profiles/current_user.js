@@ -105,7 +105,7 @@ const getUserProfile = (userId) => {
             const data = response.details;
             profile.innerHTML = `
             <div class="user-profile-image">
-            <img src="${data.profile_pic}"  alt="" class="circle-img">
+            <img style="height:60px;width:60px" src="${data.profile_pic}"  alt="" class="circle-img">
             </div>
             <div class="align-none user-detials mt-2 ml-2">
                 <h4 class=" text-muted user-username">${data.username}</h4>
