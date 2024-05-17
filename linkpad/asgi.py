@@ -1,5 +1,5 @@
 """
-ASGI config for linkedin_clone_project project.
+ASGI config for linkpad project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "linkedin_clone_project.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "linkpad.settings")
 
 application = get_asgi_application()
